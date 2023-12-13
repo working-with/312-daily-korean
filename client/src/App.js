@@ -5,6 +5,7 @@ import Main from './components/Main';
 import Complete from './components/Complete';
 import Terms from './components/Terms';
 import Feedback from './components/Feedback';
+import GlobalStyle from './style/globalStyle';
 
 const Router = () => {
   return (
@@ -23,9 +24,11 @@ const Router = () => {
 
 function App() {
   return (
-    <div className="App">
-         <Router />
-    </div>
+    <GlobalStyle>
+      <div className="App">
+        <Router />
+      </div>
+    </GlobalStyle>
   );
 }
 
