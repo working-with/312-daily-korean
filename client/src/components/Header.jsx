@@ -12,6 +12,6 @@ const Complete  = () => {
 	</div>
 	</header>
 	);
-}
+}			
 
 export default Complete;
