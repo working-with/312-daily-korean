@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Splash from './components/Splash';
+import OnBoarding from './components/OnBoarding';
+import Main from './components/Main';
+import Complete from './components/Complete';
+import Terms from './components/Terms';
+import Feedback from './components/Feedback';
+
+const Router = () => {
+  return (
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Splash />} />
+          <Route path="/onboarding" element={<OnBoarding />} />
+          <Route path="/main" element={<Main />}  />
+          <Route path="/complete" element={<Complete />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/feedback" element={<Feedback />} />
+        </Routes>
+    </BrowserRouter>
+  );
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+         <Router />
     </div>
   );
 }
