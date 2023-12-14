@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header  from './components/Header';
 import Splash from './components/Splash';
 import OnBoarding from './components/OnBoarding';
 import Main from './components/Main';
@@ -25,6 +26,7 @@ const Router = () => {
 function App() {
   return (
     <div className="App">
+      <Header/>
       <Router />
       <GlobalStyle/>
     </div>
