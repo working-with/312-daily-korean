@@ -142,11 +142,12 @@ export const GlobalStyle = createGlobalStyle`
 ${reset}
 
 @supports (-webkit-touch-callout: none) { 
-  height: -webkit-fill-available;  //크롬에서안될 상황 대비 ios 노치 대응
+  height: -webkit-fill-available;  // 크롬에서안될 상황 대비 ios 노치 대응
 }
 
 #root, body, html {
-  max-width: 43rem;
+  max-width: 393px;
+  width: 100%;
   height: 100vh;
   margin: 0 auto;
   overflow-y: auto;
