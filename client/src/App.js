@@ -24,11 +24,10 @@ const Router = () => {
 
 function App() {
   return (
-    <GlobalStyle>
-      <div className="App">
-        <Router />
-      </div>
-    </GlobalStyle>
+    <div className="App">
+      <Router />
+      <GlobalStyle/>
+    </div>
   );
 }
 
