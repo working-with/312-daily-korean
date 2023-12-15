@@ -1,44 +1,44 @@
-import React from 'react';
-import { Select } from 'antd';
+import React, { useState } from 'react';
+import { Select, Tooltip } from 'antd';
+import styled from 'styled-components';
+import theme from './../style/theme';
+import { InfoCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
+import Create from '../assets/create_button.png';
+import DoCreate from '../assets/do_create.png';
+import IngrendientText from "../assets/ingredient.png";
 
 const Main = () => {
+	const [textCount, setTextCountCount] = useState(0);
+
+	const onTextChangeHandler = (e) => {
+    setTextCountCount(e.target.value.length);
+  };
 
 	return (
-		<div>
-			<section>
-				<div>캐릭터 이미지</div>
-				<div>
-					<div>i</div>
-					<p>모든 정보를 입력하면 정확도가 올라가요!</p>
-					<h1>쿠션어 제작을 해드려요</h1>
-				</div>
-			</section>
-			<section>
-				<textarea />
-				<p>100자 / 400자</p>
-			</section>
-			<section>
-				<h1>쿠션어 재료</h1>
-				<p>설명 문구</p>
-				<div>
-					<div>!</div>
-					<p>쿠션어를 만들기 위해서 재료가 모두 필요해요!</p>
-				</div>
-				<div>
-					<Select
-						defaultValue="직업"
-						style={{ width: 120 }}
-						//onChange={}
-						options={[
-							{
-								value: 'it',
-								label: 'it',
-							}
-						]}
-					/>
-					<Select
-						defaultValue="상대"
-						style={{ width: 120 }}
+		<MainBox>
+			<TitleSection>
+				<img alt='몽글 캐릭터 이미지' />
+				<FlexBox>
+					<Tooltip title="모든 정보를 입력하면 정확도가 올라가요!" trigger="click" overlayInnerStyle={{ maxWidth: '85px', fontSize: '7px'}} color= '#807A65'>
+						<InfoCircleFilled style={{ fontSize: '17px', color: '#807A65' }} />
+					</Tooltip>
+					<DoCreateTitle>쿠션어를 제작해 보세요</DoCreateTitle>
+				</FlexBox>
+			</TitleSection>
+			<InputSection>
+				<Textarea onChange={onTextChangeHandler} maxLength={400} />
+				<Yellow3P style={{ float: 'right' }}>{textCount}자 / 400자</Yellow3P>
+			</InputSection>
+			<SelectSection>
+				<IngredientTitle>쿠션어 재료</IngredientTitle>
+				<Yellow3P>쿠션어를 만들기 위해서는 아래 재료들이 필요해요</Yellow3P>
+				<FlexBox style={{ marginTop: '15px', marginBottom: '25px' }}>
+					<ExclamationCircleFilled style={{ fontSize: '16px', color: '#FF567E' }} />
+					<WarnText>쿠션어를 만들기 위해서 재료가 모두 필요해요!</WarnText>
+				</FlexBox>
+				<SelectBox>
+					<SelectCard
+						defaultValue="대화 상대"
 						//onChange={}
 						options={[
 							{
@@ -55,57 +55,168 @@ const Main = () => {
 							}
 						]}
 					/>
-					<Select
-						defaultValue="목적"
-						style={{ width: 120 }}
+					<SelectCard
+						defaultValue="대화 채널"
 						//onChange={}
 						options={[
 							{
-								value: '요청하기',
-								label: '요청하기',
-							},
-							{
-								value: '거절하기',
-								label: '거절하기',
-							},
-							{
-								value: '질문하기',
-								label: '질문하기',
-							},
-							{
-								value: '사과하기',
-								label: '사과하기',
-							},
-							{
-								value: '안부 인사하기',
-								label: '안부 인사하기',
-							}
-						]}
-					/>
-					<Select
-						defaultValue="수단"
-						style={{ width: 120 }}
-						//onChange={}
-						options={[
-							{
-								value: '이메일',
+								value: 'email',
 								label: '이메일',
 							},
 							{
-								value: '메신저',
+								value: 'messanger',
 								label: '메신저',
 							},
 							{
-								value: '대면',
+								value: 'offline',
 								label: '대면',
 							}
 						]}
 					/>
-				</div>
-				
-			</section>
-		</div>
+					<SelectCard
+						defaultValue="대화 목적"
+						//onChange={}
+						options={[
+							{
+								value: 'request',
+								label: '요청하기',
+							},
+							{
+								value: 'reject',
+								label: '거절하기',
+							},
+							{
+								value: 'quest',
+								label: '질문하기',
+							},
+							{
+								value: 'apologize',
+								label: '사과하기',
+							},
+							{
+								value: 'greet',
+								label: '안부 인사하기',
+							}
+						]}
+					/>
+				</SelectBox>
+			</SelectSection>
+			<CreateBtn>쿠션어 만들기</CreateBtn>
+		</MainBox>
 	);
 }
 
 export default Main;
+
+const MainBox = styled.div`
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const FlexBox = styled.div`
+	display: flex;
+	justify-content: center;
+`;
+
+const TitleSection = styled.section`
+	margin-bottom: 30px;
+	background: ${theme.colors.yellow2};
+	padding: 0 16px;
+	width: 100%;
+	height: 258px;
+`;
+
+const InputSection = styled.section`
+	width: 360px;
+	height: 370px;
+	padding: 10px;
+	box-shadow: 0px 0px 5px 1px rgba(130, 82, 25, 0.3);
+	border-radius: 20px;
+`;
+
+const Textarea = styled.textarea`
+	border: none;
+	width: 340px;
+	height: 330px;
+	resize: none;
+	&:focus {
+		outline: none;
+	}
+`;
+
+const Yellow3P = styled.p`
+	color: ${theme.colors.yellow3};
+	font-size: 16px;
+`;
+
+const SelectSection = styled.section`
+	text-align: center;
+`;
+
+const SelectBox = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+`;
+
+const CreateBtn = styled.button`
+	background: url(${Create}) no-repeat center;
+	background-size: contain;
+	text-indent: -9999px;
+	display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-color: transparent;
+  width: 272.49px;
+  height: 153.58px;
+  color: white;
+  font-size: 18px;
+`;
+
+const DoCreateTitle = styled.h2`
+	width: 222px;
+	height: 23px;
+  background: url(${DoCreate}) no-repeat center;
+  background-size: contain;
+  text-indent: -9999px;
+	margin-left: 10px;
+`;
+
+const IngredientTitle = styled.h2`
+  width: 300px;
+	height: 35px;
+  background: url(${IngrendientText}) no-repeat center;
+  background-size: contain;
+  text-indent: -9999px;
+	margin: 50px auto 15px;
+`;
+
+const WarnText = styled.p`
+	color: #FF567E;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 10px;
+`;
+
+const SelectCard = styled(Select)`
+	margin-bottom: 10px;
+	width: 328px;
+	height: 72px;
+	padding: 10px 0px 10px 20px;
+	.ant-select-arrow .anticon > svg {
+		fill: ${theme.colors.brown3};
+	}
+	.ant-select-selector {
+		border: 2px solid ${theme.colors.brown3} !important;
+		font-size: 20px;
+		border-radius: 13px;
+	}
+	.ant-select-selector:hover, .ant-select-selector:focus-within {
+  	border: 2px solid ${theme.colors.yellow2} !important;
+		box-shadow: 0 0 4px 2px rgba(255, 216, 46, 0.6);
+	}
+`;
