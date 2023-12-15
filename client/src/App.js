@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 import Header  from './components/Header';
 import Splash from './components/Splash';
 import OnBoarding from './components/OnBoarding';
@@ -7,6 +8,10 @@ import Complete from './components/Complete';
 import Terms from './components/Terms';
 import Feedback from './components/Feedback';
 import GlobalStyle from './style/globalStyle';
+
+const Wrapper = styled.div`
+position: relative;
+`;
 
 const Router = () => {
   return (
@@ -25,11 +30,11 @@ const Router = () => {
 
 function App() {
   return (
-    <div className="App">
+    <Wrapper className="App">
       <Header/>
       <Router />
       <GlobalStyle/>
-    </div>
+    </Wrapper>
   );
 }
 
