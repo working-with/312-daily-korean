@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "../style/theme";
 import { Button, Image, Tooltip } from "antd";
@@ -148,6 +148,7 @@ const UnlikeButton = styled.button`
 	color: ${theme.colors.brown2};
 	background: ${theme.colors.brown1};
 	margin-right: 16px;
+  padding: 0 24px;
 	&::before{
 		content:'';
 		width: 24px;
@@ -186,6 +187,7 @@ const LikeButton = styled.button`
 	color: ${theme.colors.brown4};
 	background: ${theme.colors.brown2};
 	font-weight: 700;
+  padding: 0 24px;
 	&::before{
 		content:'';
 		width: 24px;
@@ -300,25 +302,88 @@ const MoveButton = styled.button`
 `;
 
 const Complete = () => {
-  const complete_text = document.querySelector(".complete_text"); 
-  const text_value = complete_text.value;
 
-	const handleShare = async () => {
+  const [like, setLike] = useState(false);
+  const [unlike, setUnlike] = useState(false);
+  const [text, setText] = useState(''); // 텍스트 상태 초기화
+  const [completeText, setCompleteText] = useState(''); // 텍스트 상태 초기화
 
-		if (navigator.share) {
-			try {
-				await navigator.share({
-					title: 'Title to share', // 공유될 제목
-					text: text_value, // 공유될 텍스트
-				});
-				console.log('공유 완료!');
-			} catch (error) {
-				console.error('공유 실패:', error);
-			}
-		} else {
-			console.log('Web Share API를 지원하지 않는 브라우저입니다.');
-		}
-	}
+
+  //텍스트 갯수 업데이트
+  const maxLength = 400; // 최대 글자 수
+
+  const handleTextChange = (event) => {
+    const newText = event.target.value; // 입력된 텍스트 가져오기
+    if (newText.length <= maxLength) {
+      setText(newText); // 최대 글자 수 이내일 때 상태 업데이트
+    }
+  };
+
+  //마음에 들어요 클릭
+  const handleLike = async () => {
+    // 서버로 보낼 데이터
+    const data = {
+      action: 'like', // 'like' 라는 액션을 서버로 전송
+    };
+
+    try {
+      const response = await fetch('/api/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setLike(true);
+        setUnlike(false);
+        // 성공적으로 처리되었을 때 클라이언트 상태 업데이트
+      } else {
+        console.error('마음에 들어요 처리 실패');
+      }
+    } catch (error) {
+      console.error('요청 실패:', error);
+    }
+  };
+
+  //부족해요 클릭
+  const handleUnlike = async () => {
+    // 서버로 보낼 데이터
+    const data = {
+      action: 'unlike', // 'unlike' 라는 액션을 서버로 전송
+    };
+
+    try {
+      const response = await fetch('/api/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setUnlike(true);
+        setLike(false);
+        // 성공적으로 처리되었을 때 클라이언트 상태 업데이트
+      } else {
+        console.error('부족해요 처리 실패');
+      }
+    } catch (error) {
+      console.error('요청 실패:', error);
+    }
+  };
+
+
+  const handleCopyText = async () => {
+    try {
+      await navigator.clipboard.writeText(completeText); // 클립보드에 텍스트 복사
+      alert('텍스트가 클립보드에 복사되었습니다.');
+    } catch (error) {
+      console.error('텍스트 복사 실패:', error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -333,19 +398,19 @@ const Complete = () => {
       <Section>
         <BeforeComplete>쿠션어 적용 전이에요.</BeforeComplete>
         <TextAreaWrapper>
-          <TextAreaBox />
-          <TextAreaText>000자/000자</TextAreaText>
+          <TextAreaBox onChange={handleTextChange} maxLength={maxLength} />
+          <TextAreaText>{text.length}자/400자</TextAreaText>
         </TextAreaWrapper>
       </Section>
       <Section>
         <AfterComplete>쿠션어 제작이 완료되었어요.</AfterComplete>
         <TextAreaWrapper>
-          <TextAreaBox className="complete_text" value="test" />
-					<CopyButton onClick={handleShare}>복사</CopyButton>
+          <TextAreaBox className="complete_text" value={completeText} />
+					<CopyButton onClick={handleCopyText}>복사</CopyButton>
         </TextAreaWrapper>
         <LikeWrapper>
-          <UnlikeButton>부족해요</UnlikeButton>
-          <LikeButton>마음에 들어요</LikeButton>
+          <UnlikeButton onClick={handleLike} disabled={like}>부족해요</UnlikeButton>
+          <LikeButton onClick={handleUnlike} disabled={unlike}>마음에 들어요</LikeButton>
         </LikeWrapper>
       </Section>
       <Section>
@@ -378,3 +443,4 @@ const Complete = () => {
 };
 
 export default Complete;
+
