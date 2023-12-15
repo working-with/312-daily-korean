@@ -17,18 +17,20 @@ import IngrendientText from "../assets/ingredient.png";
 import Partner from "../assets/partner.png";
 import Channel from "../assets/channel.png";
 import Purpose from "../assets/purpose.png";
+import CompleteBg from "../assets/complete_background.png";
 
 
 
 
 
 const Wrapper = styled.main`
-  background: ${theme.colors.yellow2};
+  background: url(${CompleteBg}) no-repeat center;
+  background-size: cover;
   padding: 0 16px;
 `;
 
 const Section = styled.section`
-  background: ${theme.colors.yellow2};
+
 `;
 
 const CharactorWrapper = styled.div`

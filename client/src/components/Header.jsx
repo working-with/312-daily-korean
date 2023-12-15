@@ -5,6 +5,8 @@ import hamburgerIcon from '../assets/hamburger_icon.png';
 import shareIcon from '../assets/share_icon.png';
 import theme from '../style/theme'
 import MongleLogo from "../assets/mongle_logo.png";
+import DrawerBg from "../assets/drawer.png";
+
 import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
@@ -73,7 +75,10 @@ cursor: pointer;
 `;
 
 const DrawerWrapper = styled(Drawer)`
-width: 262px !important;
+width: 100%;
+height: 100vh;
+background: url(${DrawerBg}) no-repeat center  !important;
+background-size: cover !important;
 `;
 
 const DrawerClose = styled.button`
