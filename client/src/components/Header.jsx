@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Drawer, Typography  } from 'antd';
 import hamburgerIcon from '../assets/hamburger_icon.png';
 import shareIcon from '../assets/share_icon.png';
 import theme from '../style/theme'
 import MongleLogo from "../assets/mongle_logo.png";
+import { Link } from 'react-router-dom';
+
+const { Text } = Typography;
 
 const Wrapper = styled.header`
 height: 62px;
@@ -66,9 +70,35 @@ background-size: cover;
 border: none;
 text-indent: -9999px;
 cursor: pointer;
-`
+`;
 
-	const handleShare = async () => {
+const DrawerWrapper = styled(Drawer)`
+width: 262px !important;
+`;
+
+const DrawerClose = styled.button`
+	position: absolute;	
+background: none;
+	border: none;
+	right: 30px;
+`;
+
+const DrawerMenuWrapper = styled.div`
+display: flex;
+flex-flow: column nowrap;
+margin-top: 48px;
+`;
+
+const DrawerMenu = styled.a`
+font-size: 18px;
+font-weight: bold;
+line-height: 21.6px;
+margin-bottom: 48px;
+color: black;
+`;
+
+	const handleShare = async () => {	
+
 		if (navigator.share) {
 			try {
 				await navigator.share({
@@ -87,6 +117,16 @@ cursor: pointer;
 
 const Header  = () => {
 
+
+	const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
 	if (window.location.pathname === '/') return null;
 
 
@@ -95,9 +135,28 @@ const Header  = () => {
 	<Menu className='header_menu'>
 		<MenuUl>
 			<MenuShare><MenuShareBtn onClick={handleShare}>공유</MenuShareBtn></MenuShare>
-			<MenuDraw><MenuDrawBtn>메뉴</MenuDrawBtn></MenuDraw>
+			<MenuDraw><MenuDrawBtn onClick={showDrawer}>메뉴</MenuDrawBtn></MenuDraw>
 		</MenuUl>
 	</Menu>
+	<DrawerWrapper
+				className='drawer'
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        open={open}
+        getContainer={false}
+				size="262px"
+      >
+				<DrawerClose onClick={onClose}><svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.70538 11.2946C7.09466 10.9053 7.095 10.2743 6.70615 9.88462L3.25073 6.42165C3.01822 6.18863 3.01822 5.81137 3.25073 5.57835L6.70615 2.11538C7.095 1.72569 7.09466 1.09466 6.70538 0.705384C6.31581 0.315811 5.68419 0.315811 5.29462 0.705385L0.733333 5.26667C0.328324 5.67168 0.328324 6.32832 0.733333 6.73333L5.29462 11.2946C5.68419 11.6842 6.31581 11.6842 6.70538 11.2946Z" fill="black"/>
+</svg>
+</DrawerClose>
+				<DrawerMenuWrapper>
+					<DrawerMenu>의견 제안</DrawerMenu>
+					<DrawerMenu>이용 약관</DrawerMenu>
+					<DrawerMenu>개인정보처리방침</DrawerMenu>
+					</DrawerMenuWrapper>
+      </DrawerWrapper>
 	</Wrapper>
 	);
 }			
