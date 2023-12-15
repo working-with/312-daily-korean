@@ -168,6 +168,10 @@ ${reset}
   box-sizing: border-box;
 }
 
+.ant-drawer-content-wrapper{
+  width: 216px !important;
+}
+
 `;
 
 export default GlobalStyle;
