@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Select, Tooltip } from 'antd';
+import axios from 'axios';
+import { Select, Tooltip, message } from 'antd';
 import styled from 'styled-components';
 import theme from './../style/theme';
 import { InfoCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
@@ -8,10 +9,63 @@ import DoCreate from '../assets/do_create.png';
 import IngrendientText from "../assets/ingredient.png";
 
 const Main = () => {
-	const [textCount, setTextCountCount] = useState(0);
+	const { Option } = Select;
+	const [isFull, setIsFull] = useState(true);
+	const [textCount, setTextCount] = useState(0);
+	const [content, setContent] = useState('');
+	const [partner, setPartner] = useState('대화 상대');
+	const [channel, setChannel] = useState('대화 채널');
+	const [purpose, setPurpose] = useState('대화 목적');
+
+	const handleSubmitClick = () => {
+		if (
+				!content ||
+				!partner ||
+				!channel ||
+				!purpose
+		) {
+				setIsFull(false);
+				return;
+		}
+				
+		axios
+				.post('/api/v1/situation', 
+					{
+						inputText: content,
+						partner: partner,
+						method: channel,
+						purpose: purpose
+					},
+					{
+						headers: {
+								'Content-Type': 'application/json',
+								// userId: // 로그인을 안 하는데 userid를 어떻게 가져오지?
+						}
+					}
+				)
+				.then((result) => {
+						if (result.status === 200) {
+							message.success('쿠션어 만들기 ');
+						}
+				})
+				.catch((error) => {
+						message.error('쿠션어 만들기 실패');
+				});
+		};
+
+		const SelectedPartnerHandler = (value) => {
+			setPartner(value);
+			console.log(value);
+		};
+		const SelectedChannelHandler = (value) => {
+			setChannel(value);
+		};
+		const SelectedPurposeHandler = (value) => {
+			setPurpose(value);
+		};
 
 	const onTextChangeHandler = (e) => {
-    setTextCountCount(e.target.value.length);
+    setTextCount(e.target.value.length);
   };
 
 	return (
@@ -32,76 +86,42 @@ const Main = () => {
 			<SelectSection>
 				<IngredientTitle>쿠션어 재료</IngredientTitle>
 				<Yellow3P>쿠션어를 만들기 위해서는 아래 재료들이 필요해요</Yellow3P>
-				<FlexBox style={{ marginTop: '15px', marginBottom: '25px' }}>
-					<ExclamationCircleFilled style={{ fontSize: '16px', color: '#FF567E' }} />
-					<WarnText>쿠션어를 만들기 위해서 재료가 모두 필요해요!</WarnText>
-				</FlexBox>
+				{!isFull && 
+					<FlexBox style={{ marginTop: '15px', marginBottom: '25px' }}>
+						<ExclamationCircleFilled style={{ fontSize: '16px', color: '#FF567E' }} />
+						<WarnText>쿠션어를 만들기 위해서 재료가 모두 필요해요!</WarnText>
+					</FlexBox>
+				}
 				<SelectBox>
 					<SelectCard
-						defaultValue="대화 상대"
-						//onChange={}
-						options={[
-							{
-								value: '상사',
-								label: '상사',
-							},
-							{
-								value: '동료',
-								label: '동료',
-							},
-							{
-								value: '고객',
-								label: '고객',
-							}
-						]}
-					/>
+						value={partner} 
+						onChange={SelectedPartnerHandler}
+					>
+						<Option value="boss">상사</Option>
+						<Option value="coworker">동료</Option>
+						<Option value="client">고객</Option>
+					</SelectCard>
 					<SelectCard
-						defaultValue="대화 채널"
-						//onChange={}
-						options={[
-							{
-								value: 'email',
-								label: '이메일',
-							},
-							{
-								value: 'messanger',
-								label: '메신저',
-							},
-							{
-								value: 'offline',
-								label: '대면',
-							}
-						]}
-					/>
+						value={channel} 
+						onChange={SelectedChannelHandler}
+					>
+						<Option value="email">이메일</Option>
+						<Option value="messanger">메신저</Option>
+						<Option value="offline">대면</Option>
+					</SelectCard>
 					<SelectCard
-						defaultValue="대화 목적"
-						//onChange={}
-						options={[
-							{
-								value: 'request',
-								label: '요청하기',
-							},
-							{
-								value: 'reject',
-								label: '거절하기',
-							},
-							{
-								value: 'quest',
-								label: '질문하기',
-							},
-							{
-								value: 'apologize',
-								label: '사과하기',
-							},
-							{
-								value: 'greet',
-								label: '안부 인사하기',
-							}
-						]}
-					/>
+						value={purpose} 
+						onChange={SelectedPurposeHandler}
+					>
+						<Option value="request">요청하기</Option>
+						<Option value="reject">거절하기</Option>
+						<Option value="quest">질문하기</Option>
+						<Option value="apologize">사과하기</Option>
+						<Option value="greet">안부 인사하기</Option>
+					</SelectCard>
 				</SelectBox>
 			</SelectSection>
-			<CreateBtn>쿠션어 만들기</CreateBtn>
+			<CreateBtn onClick={handleSubmitClick}>쿠션어 만들기</CreateBtn>
 		</MainBox>
 	);
 }
@@ -175,6 +195,7 @@ const CreateBtn = styled.button`
   height: 153.58px;
   color: white;
   font-size: 18px;
+	margin-top: 15px;
 `;
 
 const DoCreateTitle = styled.h2`
@@ -203,7 +224,8 @@ const WarnText = styled.p`
 `;
 
 const SelectCard = styled(Select)`
-	margin-bottom: 10px;
+	margin-top: 6px;
+	margin-bottom: 3px;
 	width: 328px;
 	height: 72px;
 	padding: 10px 0px 10px 20px;
