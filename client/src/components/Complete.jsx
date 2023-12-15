@@ -300,14 +300,16 @@ const MoveButton = styled.button`
 `;
 
 const Complete = () => {
+  const complete_text = document.querySelector(".complete_text"); 
+  const text_value = complete_text.value;
 
 	const handleShare = async () => {
+
 		if (navigator.share) {
 			try {
 				await navigator.share({
 					title: 'Title to share', // 공유될 제목
-					text: 'Check out this URL', // 공유될 텍스트
-					url: 'https://localhost:3000/' // 공유될 URL
+					text: text_value, // 공유될 텍스트
 				});
 				console.log('공유 완료!');
 			} catch (error) {
@@ -338,7 +340,7 @@ const Complete = () => {
       <Section>
         <AfterComplete>쿠션어 제작이 완료되었어요.</AfterComplete>
         <TextAreaWrapper>
-          <TextAreaBox />
+          <TextAreaBox className="complete_text" value="test" />
 					<CopyButton onClick={handleShare}>복사</CopyButton>
         </TextAreaWrapper>
         <LikeWrapper>
