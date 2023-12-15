@@ -12,6 +12,7 @@ const colors = {
   brown2: '#A49D85',
   brown3: '#807A65',
   brown4: '#5D5A50',
+  gray1: '#FAFAFA'
 };
 
 const fonts = {

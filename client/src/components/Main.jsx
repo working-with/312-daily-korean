@@ -6,7 +6,8 @@ import theme from './../style/theme';
 import { InfoCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import Create from '../assets/create_button.png';
 import DoCreate from '../assets/do_create.png';
-import IngrendientText from "../assets/ingredient.png";
+import IngrendientText from '../assets/ingredient.png';
+import Footer from './Footer';
 
 const Main = () => {
 	const { Option } = Select;
@@ -122,6 +123,7 @@ const Main = () => {
 				</SelectBox>
 			</SelectSection>
 			<CreateBtn onClick={handleSubmitClick}>쿠션어 만들기</CreateBtn>
+			<Footer />
 		</MainBox>
 	);
 }

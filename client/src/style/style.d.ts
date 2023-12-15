@@ -14,6 +14,7 @@ declare module 'styled-components' {
       brown2;
       brown3;
       brown4;
+      gray1;
     };
     fonts: {
         
