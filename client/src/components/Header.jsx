@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import hamburgerIcon from '../assets/hamburger_icon.png';
 import shareIcon from '../assets/share_icon.png';
 import theme from '../style/theme'
+import MongleLogo from "../assets/mongle_logo.png";
 
 const Wrapper = styled.header`
 height: 62px;
@@ -15,8 +16,16 @@ padding: 8px 18px;
 box-sizing: border-box;
 `;
 
-const Logo = styled.div`
-background: pink
+const LogoWrapper = styled.div`
+`
+
+const Logo = styled.a`
+display: block;
+width: 46px;
+height: 46px;
+background: url(${MongleLogo}) no-repeat center;
+background-size: contain;
+text-indent: -9999px;
 `;
 
 const Menu = styled.div`
@@ -81,7 +90,7 @@ const Header  = () => {
 
 	
 	return (<Wrapper>
-	<Logo className='header_logo'><a href="#">logo</a></Logo>
+	<LogoWrapper className='header_logo'><Logo  href="#">logo</Logo></LogoWrapper>
 	<Menu className='header_menu'>
 		<MenuUl>
 			<MenuShare><MenuShareBtn onClick={handleShare}>공유</MenuShareBtn></MenuShare>
