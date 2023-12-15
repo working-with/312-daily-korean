@@ -87,8 +87,9 @@ cursor: pointer;
 
 const Header  = () => {
 
+	if (window.location.pathname === '/') return null;
 
-	
+
 	return (<Wrapper>
 	<LogoWrapper className='header_logo'><Logo  href="#">logo</Logo></LogoWrapper>
 	<Menu className='header_menu'>
