@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
 import theme from "../style/theme";
@@ -21,6 +22,8 @@ import Partner from "../assets/partner.png";
 import Channel from "../assets/channel.png";
 import Purpose from "../assets/purpose.png";
 import CompleteBg from "../assets/complete_background.png";
+import CompleteCharactor from "../assets/complete_character.gif";
+
 
 const Wrapper = styled.main`
   background: url(${CompleteBg}) no-repeat center;
@@ -39,8 +42,20 @@ const CharactorWrapper = styled.div`
 `;
 
 const Charactor = styled(Image)`
-  width: 115px !important;
-  border-radius: 50%;
+  width: 372px  !important;
+`;
+
+const CompleteTitleWrapper = styled.div`
+  &::before{
+    content: "";
+    display: block;
+    width: 157px;
+    height: 37.45px;
+    background: ${theme.colors.yellow3};
+    opacity: 20%;
+    border-radius: 82%;
+    margin: -65px auto 10.56px;
+  }
 `;
 
 const CompleteTitle = styled.h2`
@@ -75,7 +90,7 @@ const TextAreaText = styled.p`
   font-size: 16px;
   color: ${theme.colors.yellow3};
   right: 16px;
-  bottom: 16px;
+  bottom: 12px;
 `;
 
 const TextAreaWrapper = styled.div`
@@ -403,12 +418,13 @@ const Complete = () => {
 
   return (
     <Wrapper>
+      <Header />
       <Section>
         <CharactorWrapper>
-          <Charactor src="https://url.kr/wja2qz" />
-          <div>
+          <Charactor src={CompleteCharactor} />
+          <CompleteTitleWrapper>
             <CompleteTitle>쿠션어 제작이 완료되었어요!</CompleteTitle>
-          </div>
+          </CompleteTitleWrapper>
         </CharactorWrapper>
       </Section>
       <Section>
