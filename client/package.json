@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://working-with.github.io/312-daily-korean/",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@testing-library/jest-dom": "^5.17.0",
