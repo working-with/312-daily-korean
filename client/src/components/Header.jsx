@@ -3,6 +3,7 @@ import styled from "styled-components";
 import shareIcon from "../assets/share_icon.png";
 import theme from "../style/theme";
 import MongleLogo from "../assets/mongle_logo.png";
+import { useNavigate } from 'react-router-dom';
 
 
 const Wrapper = styled.header`
@@ -61,6 +62,8 @@ const BackButton = styled.button`
 `;
 
 const handleShare = async () => {
+
+
   if (navigator.share) {
     try {
       await navigator.share({
@@ -78,12 +81,18 @@ const handleShare = async () => {
 
 const Header = () => {
 
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // 뒤로가기
+  };
+	
 
   const pathname = window.location.pathname;
 
   if(pathname.includes('onboarding')) return (
     <Wrapper style={{background:'white'}}>
-      <BackButton><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <BackButton onClick={goBack}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_835_819)">
 <path d="M14.7054 17.2946C15.0947 16.9053 15.095 16.2743 14.7062 15.8846L11.2507 12.4217C11.0182 12.1886 11.0182 11.8114 11.2507 11.5783L14.7062 8.11538C15.095 7.72569 15.0947 7.09466 14.7054 6.70538C14.3158 6.31581 13.6842 6.31581 13.2946 6.70538L8.73333 11.2667C8.32832 11.6717 8.32832 12.3283 8.73333 12.7333L13.2946 17.2946C13.6842 17.6842 14.3158 17.6842 14.7054 17.2946Z" fill="black"/>
 </g>

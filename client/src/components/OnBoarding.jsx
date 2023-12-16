@@ -8,10 +8,7 @@ import One from "../assets/circle_first.png";
 import Two from "../assets/circle_second.png";
 import Three from "../assets/circle_third.png";
 
-
-const OnBoarding  = () => {
-
-	const Wrapper = styled.main`
+const Wrapper = styled.main`
   background: ${theme.colors.white}
   background-size: cover;
 `;
@@ -102,6 +99,9 @@ align-items: top;
 		margin-right: 8px;
 	}
 `;
+
+
+const OnBoarding  = () => {
 
 	return (<Wrapper>
       <Header />
