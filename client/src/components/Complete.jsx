@@ -75,7 +75,7 @@ const TextAreaText = styled.p`
   font-size: 16px;
   color: ${theme.colors.yellow3};
   right: 16px;
-  bottom: 8px;
+  bottom: 16px;
 `;
 
 const TextAreaWrapper = styled.div`
