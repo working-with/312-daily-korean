@@ -17,9 +17,9 @@ const Router = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/" element={<Splash />} />
+          <Route path="/splash" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
-          <Route path="/main" element={<Main />}  />
+          <Route path="/" element={<Main />}  />
           <Route path="/complete" element={<Complete />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/feedback" element={<Feedback />} />
