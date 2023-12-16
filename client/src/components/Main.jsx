@@ -8,6 +8,7 @@ import Create from '../assets/create_button.png';
 import DoCreate from '../assets/do_create.png';
 import IngrendientText from '../assets/ingredient.png';
 import Footer from './Footer';
+import mainTop from '../assets/main_top.png'
 
 const Main = () => {
 	const { Option } = Select;
@@ -25,6 +26,7 @@ const Main = () => {
 				!channel ||
 				!purpose
 		) {
+				console.log(content, partner, channel, purpose);
 				setIsFull(false);
 				return;
 		}
@@ -65,15 +67,16 @@ const Main = () => {
 			setPurpose(value);
 		};
 
-	const onTextChangeHandler = (e) => {
-    setTextCount(e.target.value.length);
-  };
+		const onTextChangeHandler = (e) => {
+			setContent(e.target.value);
+			setTextCount(e.target.value.length);
+		};
 
 	return (
 		<MainBox>
 			<TitleSection>
 				<img alt='몽글 캐릭터 이미지' />
-				<FlexBox>
+				<FlexBox style={{ marginTop: '20px' }}>
 					<Tooltip title="모든 정보를 입력하면 정확도가 올라가요!" trigger="click" overlayInnerStyle={{ maxWidth: '85px', fontSize: '7px'}} color= '#807A65'>
 						<InfoCircleFilled style={{ fontSize: '17px', color: '#807A65' }} />
 					</Tooltip>
@@ -81,7 +84,7 @@ const Main = () => {
 				</FlexBox>
 			</TitleSection>
 			<InputSection>
-				<Textarea onChange={onTextChangeHandler} maxLength={400} />
+				<Textarea onChange={onTextChangeHandler} maxLength={400} placeholder='쿠션어를 적용할 텍스트를 입력해 주세요.' />
 				<Yellow3P style={{ float: 'right' }}>{textCount}자 / 400자</Yellow3P>
 			</InputSection>
 			<SelectSection>
@@ -144,10 +147,13 @@ const FlexBox = styled.div`
 
 const TitleSection = styled.section`
 	margin-bottom: 30px;
-	background: ${theme.colors.yellow2};
+	background: url(${mainTop}) no-repeat center;
+	background-size: cover;
+	background-position: bottom;
 	padding: 0 16px;
 	width: 100%;
 	height: 258px;
+	text-align: center;
 `;
 
 const InputSection = styled.section`
@@ -200,7 +206,7 @@ const CreateBtn = styled.button`
 	margin-top: 15px;
 `;
 
-const DoCreateTitle = styled.h2`
+const DoCreateTitle = styled.div`
 	width: 222px;
 	height: 23px;
   background: url(${DoCreate}) no-repeat center;
