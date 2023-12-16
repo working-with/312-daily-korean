@@ -2,13 +2,13 @@ import React from 'react';
 import Generating from '../assets/generating.png';
 import styled from 'styled-components';
 import theme from './../style/theme';
-import LoadingBg from "../assets/loading_background.png";
+import LoadingGif from "../assets/loading_character.gif";
 
 const Loading  = () => {
 
 	return (
 		<Wrapper>
-			<img alt='로딩 이미지'/>
+			<LoadingCharacterGif src={LoadingGif} alt='몽글 캐릭터 구름' />
 			<CreateIngTitle />
 		</Wrapper>
 	);
@@ -17,10 +17,10 @@ const Loading  = () => {
 export default Loading;
 
 const Wrapper = styled.div`
-  background: url(${LoadingBg}) no-repeat center;
+  background: ${theme.colors.yellow2};
   background-size: cover;
 	height: 704px;
-	padding-top: 50%;
+	padding-top: 100px;
 	text-align: center;
 `;
 
@@ -31,5 +31,10 @@ const CreateIngTitle = styled.h2`
   background-size: contain;
   text-indent: -9999px;
 	margin: auto;
-	margin-top: 20px;
 `;
+
+const LoadingCharacterGif = styled.img`
+	width: 393px;
+	height: 322px;
+	margin: auto;
+`
