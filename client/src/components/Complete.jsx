@@ -441,10 +441,10 @@ const Complete = () => {
           <CopyButton onClick={handleCopyText}>복사</CopyButton>
         </TextAreaWrapper>
         <LikeWrapper>
-          <UnlikeButton onClick={handleLike} disabled={like}>
+          <UnlikeButton onClick={handleLike} disabled={like} ontouchstart>
             부족해요
           </UnlikeButton>
-          <LikeButton onClick={handleUnlike} disabled={unlike}>
+          <LikeButton onClick={handleUnlike} disabled={unlike} ontouchstart>
             마음에 들어요
           </LikeButton>
         </LikeWrapper>
