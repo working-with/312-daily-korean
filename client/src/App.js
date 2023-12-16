@@ -17,12 +17,10 @@ const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/splash" element={<Splash />} />
+          <Route path="/" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
-          <Route path="/" element={<Main />}  />
+          <Route path="/main" element={<Main />}  />
           <Route path="/complete" element={<Complete />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/feedback" element={<Feedback />} />
         </Routes>
     </BrowserRouter>
   );
@@ -31,7 +29,6 @@ const Router = () => {
 function App() {
   return (
     <Wrapper className="App">
-      <Header/>
       <Router />
       <GlobalStyle/>
     </Wrapper>
