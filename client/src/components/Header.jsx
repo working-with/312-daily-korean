@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Drawer, Typography } from "antd";
-import hamburgerIcon from "../assets/hamburger_icon.png";
 import shareIcon from "../assets/share_icon.png";
 import theme from "../style/theme";
 import MongleLogo from "../assets/mongle_logo.png";
-import DrawerBg from "../assets/drawer.png";
 
-
-const { Text } = Typography;
 
 const Wrapper = styled.header`
   height: 62px;
@@ -75,31 +70,21 @@ const handleShare = async () => {
 };
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
-
-  if (window.location.pathname === "/312-daily-korean/") return null;
-
   return (
     <Wrapper>
-      <LogoWrapper className="header_logo">
-        <Logo href="/main">logo</Logo>
-      </LogoWrapper>
-      <Menu className="header_menu">
-        <MenuUl>
-          <MenuShare>
-            <MenuShareBtn onClick={handleShare}>공유</MenuShareBtn>
-          </MenuShare>
-        </MenuUl>
-      </Menu>
-    </Wrapper>
-  );
+    <LogoWrapper className="header_logo">
+      <Logo href="/main">logo</Logo>
+    </LogoWrapper>
+    <Menu className="header_menu">
+      <MenuUl>
+        <MenuShare>
+          <MenuShareBtn onClick={handleShare}>공유</MenuShareBtn>
+        </MenuShare>
+      </MenuUl>
+    </Menu>
+  </Wrapper>
+  )
+
 };
 
 export default Header;
