@@ -5,11 +5,16 @@ import theme from './../style/theme';
 
 const Footer  = () => {
 
+  const handleFeedbackClick = () => {
+    window.open('https://forms.gle/6vMHR36qHkHzgUbE9', '_blank');
+  };
+
 	return (
     <FooterWrap>
       <Logo />
       <BoldText>쿠션처럼 부드러운 표현으로 바꾸어드려요!</BoldText>
       <BoldText>쿠션어 제작 서비스</BoldText>
+      <BoldText onClick={handleFeedbackClick} style={{ marginTop: '25px', cursor: 'pointer' }}>의견 제안하기</BoldText>
       <HorizontalLine />
       <MediumText>PM: 하승희</MediumText>
       <MediumText>Designer: 안지선, 이승훈</MediumText>
