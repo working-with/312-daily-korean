@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header  from './components/Header';
 import Splash from './components/Splash';
@@ -15,16 +15,16 @@ position: relative;
 
 const Router = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/" element={<Splash />} />
+          <Route path="/splash" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
-          <Route path="/main" element={<Main />}  />
+          <Route path="/" element={<Main />}  />
           <Route path="/complete" element={<Complete />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/feedback" element={<Feedback />} />
         </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
