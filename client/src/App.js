@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header  from './components/Header';
 import Splash from './components/Splash';
@@ -15,7 +15,7 @@ position: relative;
 
 const Router = () => {
   return (
-    <BrowserRouter basename='/312-daily-korean/'>
+    <HashRouter>
         <Routes>
           <Route path="/" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
@@ -24,7 +24,7 @@ const Router = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/feedback" element={<Feedback />} />
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
