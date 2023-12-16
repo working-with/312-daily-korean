@@ -15,7 +15,7 @@ position: relative;
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/312-daily-korean/'>
         <Routes>
           <Route path="/" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
