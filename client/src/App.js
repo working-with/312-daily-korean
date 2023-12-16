@@ -15,7 +15,7 @@ position: relative;
 
 const Router = () => {
   return (
-    <BrowserRouter basename='/312-daily-korean/'>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />

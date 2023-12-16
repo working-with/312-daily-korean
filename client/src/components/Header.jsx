@@ -127,7 +127,7 @@ const Header = () => {
     setOpen(false);
   };
 
-  if (window.location.pathname === "/") return null;
+  if (window.location.pathname === "/312-daily-korean/") return null;
 
   return (
     <Wrapper>
