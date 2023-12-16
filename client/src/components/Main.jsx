@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { Select, Tooltip, message, Image } from 'antd';
+import { Select, Tooltip, message } from 'antd';
 import styled from 'styled-components';
 import theme from './../style/theme';
 import { InfoCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
@@ -74,6 +75,12 @@ const Main = () => {
 			setTextCount(e.target.value.length);
 		};
 
+		const navigate = useNavigate();
+
+		const handleTitleClick = () => {
+			navigate('/onboarding'); // Onboarding 페이지로 이동
+		};
+
 	return (
 		<MainBox>
 			<HeaderSection><Header /></HeaderSection>
@@ -85,7 +92,7 @@ const Main = () => {
 							<Tooltip title="모든 정보를 입력하면 정확도가 올라가요!" trigger="click" overlayInnerStyle={{ maxWidth: '85px', fontSize: '7px'}} color= '#807A65'>
 								<InfoCircleFilled style={{ fontSize: '17px', color: '#807A65' }} />
 							</Tooltip>
-						<DoCreateTitle>쿠션어를 제작해 보세요</DoCreateTitle>
+						<DoCreateTitle onClick={handleTitleClick}>쿠션어를 제작해 보세요</DoCreateTitle>
 						</FlexBox>
 					</TitleWrapper>
 				</CharacterWrapper>
@@ -238,7 +245,7 @@ const CharacterWrapper = styled.div`
   justify-content: center;
 `;
 
-const MainCharacterGif = styled(Image)`
+const MainCharacterGif = styled.img`
   width: 330px  !important;
 `;
 
@@ -262,6 +269,7 @@ const DoCreateTitle = styled.div`
   background-size: contain;
   text-indent: -9999px;
 	margin-left: 10px;
+	cursor: pointer;
 `;
 
 const IngredientTitle = styled.h2`
