@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Select, Tooltip, message } from 'antd';
+import { Select, Tooltip, message, Image } from 'antd';
 import styled from 'styled-components';
 import theme from './../style/theme';
 import { InfoCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
@@ -8,7 +8,9 @@ import Create from '../assets/create_button.png';
 import DoCreate from '../assets/do_create.png';
 import IngrendientText from '../assets/ingredient.png';
 import Footer from './Footer';
-import mainTop from '../assets/main_top.png'
+import mainTop from '../assets/main_top.png';
+import Header from "./Header";
+import MainGif from "../assets/main_character.gif";
 
 const Main = () => {
 	const { Option } = Select;
@@ -74,14 +76,19 @@ const Main = () => {
 
 	return (
 		<MainBox>
+			<HeaderSection><Header /></HeaderSection>
 			<TitleSection>
-				<img alt='몽글 캐릭터 이미지' />
-				<FlexBox style={{ marginTop: '20px' }}>
-					<Tooltip title="모든 정보를 입력하면 정확도가 올라가요!" trigger="click" overlayInnerStyle={{ maxWidth: '85px', fontSize: '7px'}} color= '#807A65'>
-						<InfoCircleFilled style={{ fontSize: '17px', color: '#807A65' }} />
-					</Tooltip>
-					<DoCreateTitle>쿠션어를 제작해 보세요</DoCreateTitle>
-				</FlexBox>
+				<CharacterWrapper>
+					<MainCharacterGif src={MainGif} alt='몽글 캐릭터 구름' />
+					<TitleWrapper>
+						<FlexBox style={{ marginTop: '10px' }}>
+							<Tooltip title="모든 정보를 입력하면 정확도가 올라가요!" trigger="click" overlayInnerStyle={{ maxWidth: '85px', fontSize: '7px'}} color= '#807A65'>
+								<InfoCircleFilled style={{ fontSize: '17px', color: '#807A65' }} />
+							</Tooltip>
+						<DoCreateTitle>쿠션어를 제작해 보세요</DoCreateTitle>
+						</FlexBox>
+					</TitleWrapper>
+				</CharacterWrapper>
 			</TitleSection>
 			<InputSection>
 				<Textarea onChange={onTextChangeHandler} maxLength={400} placeholder='쿠션어를 적용할 텍스트를 입력해 주세요.' />
@@ -140,6 +147,12 @@ const MainBox = styled.div`
   justify-content: center;
 `
 
+const Div = styled.div`
+	background-color: ${theme.colors.yellow2};
+	width: 100%;
+	height: 50px;
+`;
+
 const FlexBox = styled.div`
 	display: flex;
 	justify-content: center;
@@ -156,6 +169,15 @@ const TitleSection = styled.section`
 	text-align: center;
 `;
 
+const HeaderSection = styled.section`
+	background: ${theme.colors.yellow2};
+	background-size: cover;
+	background-position: bottom;
+	padding: 0 16px;
+	width: 100%;
+	text-align: center;
+`;
+
 const InputSection = styled.section`
 	width: 360px;
 	height: 370px;
@@ -169,6 +191,9 @@ const Textarea = styled.textarea`
 	width: 340px;
 	height: 330px;
 	resize: none;
+	&::placeholder {
+		color: #A49D85;
+	}
 	&:focus {
 		outline: none;
 	}
@@ -204,6 +229,30 @@ const CreateBtn = styled.button`
   color: white;
   font-size: 18px;
 	margin-top: 15px;
+`;
+
+const CharacterWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MainCharacterGif = styled(Image)`
+  width: 330px  !important;
+`;
+
+const TitleWrapper = styled.div`
+  &::before{
+    content: "";
+    display: block;
+    width: 157px;
+    height: 37.45px;
+    background: ${theme.colors.yellow3};
+    opacity: 20%;
+    border-radius: 82%;
+    margin: -65px auto 10.56px;
+  }
 `;
 
 const DoCreateTitle = styled.div`
