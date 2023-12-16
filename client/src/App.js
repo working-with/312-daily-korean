@@ -15,7 +15,7 @@ position: relative;
 
 const Router = () => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
         <Routes>
           <Route path="/splash" element={<Splash />} />
           <Route path="/onboarding" element={<OnBoarding />} />
