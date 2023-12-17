@@ -106,6 +106,20 @@ const Header = () => {
   </Wrapper>
   );
 
+  if(pathname.includes('main')) return ( 
+    <Wrapper>
+    <LogoWrapper className="header_logo">
+      <Logo href="/main">logo</Logo>
+    </LogoWrapper>
+    <Menu className="header_menu">
+      <MenuUl>
+
+      </MenuUl>
+    </Menu>
+  </Wrapper>
+  
+)
+
   return (
     <Wrapper>
     <LogoWrapper className="header_logo">
